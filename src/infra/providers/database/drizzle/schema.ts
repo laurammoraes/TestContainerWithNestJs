@@ -1,12 +1,12 @@
-import { serial, text, timestamp, pgTable } from "drizzle-orm/pg-core";
+import {  text, timestamp, pgTable, uuid } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
-  id: serial("id"),
+  id: uuid("id"),
   name: text("name"),
   email: text("email"),
   password: text("password"),
   role: text("role").$type<"admin" | "customer">(),
-  createdAt: timestamp("created_at"),
-  updatedAt: timestamp("updated_at"),
-  deletedAt: timestamp("deletedAt")
+  createdAt: timestamp("createdAt"),
+  updatedAt: timestamp("updatedAt"),
+  deletedAt: timestamp("deletedAt", { withTimezone: true, mode: 'string' })
 });
