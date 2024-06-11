@@ -7,8 +7,6 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { User } from 'aws-cdk-lib/aws-iam';
 import { DatabaseModule } from '../../src/infra/providers/database/database.module';
-const { GenericContainer } = require("testcontainers");
-const { Client } = require("pg");
 
 
 describe('Create User',  () => {
@@ -23,6 +21,7 @@ describe('Create User',  () => {
     let postgresClient;
 
     beforeAll(async () => {
+       
         moduleRef = await Test.createTestingModule({
 			imports: [DatabaseModule],
 			providers: [
@@ -40,23 +39,31 @@ describe('Create User',  () => {
     it('Confere se o usuário esta sendo criado corretamente', async() => {
         try {
             // jest.setTimeout(30000);
-            const container = await new PostgreSqlContainer('postgres:12-alpine').start();
+            // const container = await new PostgreSqlContainer('postgres:12-alpine').start();
 
-            const client = postgres({
-                	host: container.getHost(),
-                	port: container.getPort(),
-                	database: container.getDatabase(),
-                	user: container.getUsername(),
-                	password: container.getPassword(),
-                	max: 1,
-                })
-                const drizzleClient = drizzle(client)
+            
+            // process.env.CONTAINER_USERNAME = container.getUsername()
+            // process.env.CONTAINER_PASSWORD = container.getPassword()
+            // process.env.CONTAINER_DATABASE = container.getDatabase()
+            // process.env.CONTAINER_HOSTNAME = container.getHost()
+            // process.env.CONTAINER_PORT = container.getPort().toString()
+            // const client = postgres({
+            //     	host: container.getHost(),
+            //     	port: container.getPort(),
+            //     	database: container.getDatabase(),
+            //     	user: container.getUsername(),
+            //     	password: container.getPassword(),
+            //     	max: 1,
+            //     })
+                
+
+            //     const drizzleClient = drizzle(client)
         
                 
         
-                await migrate(drizzleClient, {
-                	migrationsFolder: 'drizzle',
-                })
+            //     await migrate(drizzleClient, {
+            //     	migrationsFolder: 'drizzle',
+            //     })
 
                 const input = { 
                     id: randomUUID(),
@@ -77,11 +84,7 @@ describe('Create User',  () => {
 
                
         
-                await client.end()
-            
-           
-        
-            await container.stop();
+               
           } catch (error) {
             console.error('Erro ao iniciar o PostgreSqlContainer:', error);
           }

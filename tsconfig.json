@@ -46,7 +46,8 @@
 		],
 		"coverageDirectory": "../coverage",
 		"testEnvironment": "node",
-		"testTimeout": 10000
+		"testTimeout": 10000,
+		"globalSetup": "./test/setup.ts",
 	},
 	"include": ["src/**/*.ts", "test/**/*.ts"],
   	"exclude": ["node_modules"]
