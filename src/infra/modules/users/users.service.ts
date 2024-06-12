@@ -21,8 +21,8 @@ export class UsersService {
     return response
   }
 
-  async findOne(id: string) {
-    const response = await this.db.select().from(user).where(eq(user.id, id)).execute()
+  async findOne(email: string) {
+    const response = await this.db.select().from(user).where(eq(user.email, email)).execute()
     return response
   }
 
