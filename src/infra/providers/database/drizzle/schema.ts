@@ -8,5 +8,5 @@ export const user = pgTable("user", {
   role: text("role").$type<"admin" | "customer">(),
   createdAt: timestamp("createdAt"),
   updatedAt: timestamp("updatedAt"),
-  deletedAt: timestamp("deletedAt", { withTimezone: true, mode: 'string' })
+  deletedAt: timestamp("deletedAt")
 });

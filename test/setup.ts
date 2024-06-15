@@ -5,7 +5,7 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator'
 
 export default async function (){
     try {
-		console.log("AQUIII")
+		
 		process.env.type = 'test'
       const container = await new PostgreSqlContainer('postgres:12-alpine').start();
 
