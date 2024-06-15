@@ -2,6 +2,7 @@ import { PostgreSqlContainer } from '@testcontainers/postgresql'
 import postgres from 'postgres'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
+import fs from 'fs';
 
 export default async function (){
     try {
@@ -27,11 +28,29 @@ export default async function (){
 
 		const drizzleClient = drizzle(client)
 
-		
-
 		await migrate(drizzleClient, {
 			migrationsFolder: 'drizzle',
 		})
+
+		const runSqlScript = async (client: any, filePath: string) => {
+            const importSql = fs.readFileSync(filePath).toString();
+            const sqlCommands = importSql.split(';').filter((command) => command.trim() !== '');
+
+            for (const sql of sqlCommands) {
+                await client.unsafe(sql);
+            }
+        };
+
+        
+        await runSqlScript(client, './test/import.sql');
+
+		// await client`INSERT INTO "user" ("name", "email", "password", "role", "createdAt") 
+		// VALUES ( 'John Doe', 'laurammoraes2@gmail.com', 'teste', 'admin', '2021-12-14 00:00:00');
+		// `;
+
+		
+
+		
 
 		await client.end()
 
@@ -44,3 +63,10 @@ export default async function (){
         
     }
 }
+
+const insertTestData = async (datasource: any) => {
+    const importSql = fs.readFileSync("./test/it/import.sql").toString();
+    for (const sql of importSql.split(";").filter((s) => s.trim() !== "")) {
+        await datasource.query(sql);
+    }
+};
