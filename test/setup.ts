@@ -7,8 +7,8 @@ import fs from 'fs';
 export default async function (){
     try {
 		
-		process.env.type = 'test'
-      const container = await new PostgreSqlContainer('postgres:12-alpine').start();
+		process.env.TYPE = 'test'
+      	const container = await new PostgreSqlContainer('postgres:12-alpine').start();
 
 		process.env.CONTAINER_USERNAME = container.getUsername()
 		process.env.CONTAINER_PASSWORD = container.getPassword()
@@ -43,7 +43,10 @@ export default async function (){
 
         await runSqlScript(client, './test/import.sql');
 
+		global.pgContainer = client 
+
 		await client.end()
+
 
     } catch (error) {
 

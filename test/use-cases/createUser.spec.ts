@@ -35,5 +35,9 @@ describe('Create User',  () => {
         expect(user.email).toBe(input.email)
        
     })
+
+    afterAll(async () => {
+        await service.remove("laura@gideonsolutions.com.br")
+    })
 })
 

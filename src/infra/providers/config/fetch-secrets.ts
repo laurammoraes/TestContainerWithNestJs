@@ -5,7 +5,7 @@ import * as schema from  '../../providers/database/drizzle/schema'
 
 
 export const fetchSecrets = () => {
-    if(process.env.type == 'test'){
+    if(process.env.TYPE == 'test'){
         const pool = new Pool({
             host: process.env.CONTAINER_HOST,
             port: process.env.CONTAINER_PORT,

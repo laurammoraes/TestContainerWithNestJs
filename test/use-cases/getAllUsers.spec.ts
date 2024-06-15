@@ -22,7 +22,7 @@ describe('Get all users ',  () => {
     it('Confere se a busca por todos os usuários cadastrados está sendo realizada corretamente', async() => {   
        
         const users = await service.findAll()
-        expect(users.length).toBe(2)
+        expect(users.length).toBe(1)
        
     })
 })
