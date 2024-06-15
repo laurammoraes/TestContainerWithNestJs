@@ -41,16 +41,7 @@ export default async function (){
             }
         };
 
-        
         await runSqlScript(client, './test/import.sql');
-
-		// await client`INSERT INTO "user" ("name", "email", "password", "role", "createdAt") 
-		// VALUES ( 'John Doe', 'laurammoraes2@gmail.com', 'teste', 'admin', '2021-12-14 00:00:00');
-		// `;
-
-		
-
-		
 
 		await client.end()
 
@@ -63,10 +54,3 @@ export default async function (){
         
     }
 }
-
-const insertTestData = async (datasource: any) => {
-    const importSql = fs.readFileSync("./test/it/import.sql").toString();
-    for (const sql of importSql.split(";").filter((s) => s.trim() !== "")) {
-        await datasource.query(sql);
-    }
-};
