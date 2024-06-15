@@ -1,34 +1,32 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import {user} from '../../providers/database/drizzle/schema'
 import { NodePgDatabase } from 'drizzle-orm/node-postgres'
 
 import * as schema from '../../providers/database/drizzle/schema'
-import { eq, isNotNull, and, isNull } from 'drizzle-orm';
+import { eq, and, isNull } from 'drizzle-orm';
 
 
 @Injectable()
 export class UsersService {
   constructor(@Inject('DRIZZLE_CONNECTION') private readonly db: NodePgDatabase<typeof schema>,){}
 
-  async create(createUserDto: CreateUserDto) {
-    await this.db.insert(user).values(createUserDto)
+  async create(createUser) {
+    await this.db.insert(user).values(createUser)
    
   }
 
   async findAll() {
-    const response = await this.db.select().from(user).where(isNull(user.deletedAt)).execute()
+    const response = await this.db.select().from(user).where(isNull(user.deletedAt))
     return response
   }
 
   async findOne(email: string) {
-    const response = await this.db.select().from(user).where(and(eq(user.email, email), isNull(user.deletedAt))).execute()
+    const response = await this.db.select().from(user).where(and(eq(user.email, email), isNull(user.deletedAt)))
     return response
   }
 
-  async update(email: string, updateUserDto: UpdateUserDto) {
-    await this.db.update(user).set(updateUserDto).where(eq(user.email, email));
+  async update(email: string, updateUser) {
+    await this.db.update(user).set(updateUser).where(eq(user.email, email));
    
   }
 

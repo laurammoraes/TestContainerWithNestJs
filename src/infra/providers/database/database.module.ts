@@ -1,7 +1,5 @@
-// src/database/database.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { drizzleFactory } from '../database/drizzle/config';
 import { fetchSecrets } from '../config/fetch-secrets';
 
 @Module({
@@ -10,7 +8,6 @@ import { fetchSecrets } from '../config/fetch-secrets';
     {
       provide: 'DRIZZLE_CONNECTION',
       useFactory: fetchSecrets,
-      // useFactory: drizzleFactory,
       inject: [ConfigService],
     },
   ],

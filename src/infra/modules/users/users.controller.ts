@@ -14,7 +14,13 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    try {
+      return this.usersService.findAll();
+
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   @Get(':email')

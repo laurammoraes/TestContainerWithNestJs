@@ -3,9 +3,7 @@ import { randomUUID } from 'crypto';
 import { UsersService } from '../../src/infra/modules/users/users.service';
 import { DatabaseModule } from '../../src/infra/providers/database/database.module';
 
-
 describe('Create User',  () => {
-
     let service: UsersService
     let moduleRef: TestingModule
 
@@ -23,9 +21,9 @@ describe('Create User',  () => {
     it('Confere se o usuário esta sendo criado corretamente', async() => {   
         const input = { 
             name: "Laura",
-            email: "laura@gideonsolutions.com.br",
+            email: "laura@email.com.br",
             password: randomUUID(),
-            role: 'admin',
+            role:  'admin' ,
         }
 
         await service.create(input)
@@ -37,7 +35,7 @@ describe('Create User',  () => {
     })
 
     afterAll(async () => {
-        await service.remove("laura@gideonsolutions.com.br")
+        await service.remove("laura@email.com.br")
     })
 })
 

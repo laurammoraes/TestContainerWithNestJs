@@ -4,7 +4,8 @@ import { UsersService } from '../../src/infra/modules/users/users.service';
 import { DatabaseModule } from '../../src/infra/providers/database/database.module';
 
 
-describe('Delete User',  () => {
+
+describe('Delete user',  () => {
 
     let service: UsersService
     let moduleRef: TestingModule
@@ -22,11 +23,12 @@ describe('Delete User',  () => {
 
     it('Confere se o usuário foi deletado corretamente', async() => {   
         const input = { 
-            name: "Renato",
-            email: "renato@gideonsolutions.com.br",
+            name: "Fulano",
+            email: "fulano@email.com.br",
             password: randomUUID(),
             role: 'admin',
         }
+        
 
         await service.create(input)
         await service.remove(input.email)

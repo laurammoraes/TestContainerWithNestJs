@@ -48,6 +48,7 @@
 		"testEnvironment": "node",
 		"testTimeout": 10000,
 		"globalSetup": "./test/setup.ts",
+		"globalTeardown":"./test/teardown.ts",
 	},
 	"include": ["src/**/*.ts", "test/**/*.ts"],
   	"exclude": ["node_modules"]

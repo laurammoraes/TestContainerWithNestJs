@@ -22,9 +22,9 @@ describe('Get user ',  () => {
 
     it('Confere se a busca por um usuário está sendo realizada corretamente', async() => {   
        
-        const [user] = await service.findOne('laurammoraes2@gmail.com')
+        const [user] = await service.findOne('laura@gmail.com')
         
-        expect(user.email).toBe('laurammoraes2@gmail.com')
+        expect(user.email).toBe('laura@gmail.com')
        
     })
 })
